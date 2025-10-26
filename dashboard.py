@@ -112,9 +112,9 @@ menu = st.sidebar.radio(
 # =====================================================
 # 📂 PATH DATASET (ditempatkan di luar supaya global)
 # =====================================================
-path_indexes = os.path.join("dataset", "indexes.csv")
-path_drinking_water = os.path.join("dataset", "share-of-the-population-using-safely-managed-drinking-water-sources.csv")
-path_pollution = os.path.join("dataset", "water_pollution_disease.csv")
+path_indexes = os.path.join("indexes.csv")
+path_drinking_water = os.path.join("share-of-the-population-using-safely-managed-drinking-water-sources.csv")
+path_pollution = os.path.join("water_pollution_disease.csv")
 
 def safe_read_csv(path):
     if os.path.exists(path):
