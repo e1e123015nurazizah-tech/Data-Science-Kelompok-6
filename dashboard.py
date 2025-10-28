@@ -21,6 +21,7 @@ from catboost import CatBoostRegressor
 import numpy as np
 import pandas as pd
 import altair as alt
+import plotly.express as px
 
 
 st.set_page_config(
@@ -865,7 +866,8 @@ elif menu == "📈 Visualisasi Lanjutan":
             "2️⃣ Round-Based Gapping (10 Tahun Terakhir)",
             "3️⃣ Heatmap Korelasi Variabel Numerik",
             "4️⃣ Kesenjangan Akses Air & Sanitasi (Kota vs Desa)",
-            "5️⃣ Proporsi Jenis Sumber Air per Wilayah"
+            "5️⃣ Proporsi Jenis Sumber Air per Wilayah",
+            "6️⃣ Treemap Hubungan GDP dan Cakupan Sanitasi"
         ])
 
         # ======================================================
@@ -1240,7 +1242,7 @@ elif menu == "📈 Visualisasi Lanjutan":
 
 
         # ======================================================
-        # 🧩 TAB 4: Proporsi Jenis Sumber Air per Wilayah
+        # 🧩 TAB 5: Proporsi Jenis Sumber Air per Wilayah
         # ======================================================
         with tabs[4]:
             st.subheader("5️⃣ Proporsi Jenis Sumber Air per Wilayah")
@@ -1273,6 +1275,35 @@ elif menu == "📈 Visualisasi Lanjutan":
                 st.altair_chart(chart2, use_container_width=True)
             else:
                 st.warning("Kolom 'region' dan 'water_source_type' tidak ditemukan di dataset.")
+
+
+        # ======================================================
+        # 🧩 TAB 6: Treemap : Akses Sanitasi Layak & Kasus Diare 
+        # ======================================================
+        with tabs[5]:
+            st.header("💰 Treemap Hubungan Ekonomi (GDP) dan Cakupan Sanitasi")
+
+            # Hapus data dengan region kosong
+            df_master_global = df_master_global.dropna(subset=['region'])
+
+            # Buat Treemap
+            fig_gdp = px.treemap(
+                df_master_global,
+                path=['region', 'country'],        # Hierarki wilayah dan negara
+                values='gdp_per_capita',           # Ukuran = GDP per kapita
+                color='sanitation_coverage',       # Warna = Cakupan Sanitasi
+                color_continuous_scale='Blues',    # Skema warna biru untuk ekonomi
+                # title='💰 Treemap Hubungan Ekonomi (GDP) dan Cakupan Sanitasi'
+            )
+
+            # Layout agar rapi di tampilan Streamlit
+            fig_gdp.update_layout(margin=dict(t=50, l=25, r=25, b=25))
+
+            # Tampilkan visualisasi
+            st.plotly_chart(fig_gdp, use_container_width=True)
+
+
+
 
 # =====================================================
 # 🤖 PEMODELAN
