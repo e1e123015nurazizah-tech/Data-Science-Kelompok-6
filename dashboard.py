@@ -151,7 +151,7 @@ if menu == "🏠 Dashboard":
         </h1>
         <h3 style='text-align: center; color: #0096c7;'>
             Analisis dan Prediksi Akses Air Minum Terkelola Menggunakan Algoritma 
-            <b>XGBoost, LightGBM,</b> dan <b>SVR</b> Berdasarkan Indikator Sanitasi dan Layanan Publik
+            <b>LightGBM, CatBoost,RandomForest,</b> dan <b>GradientBoosting</b> Berdasarkan Indikator Sanitasi dan Layanan Publik
         </h3>
         """,
         unsafe_allow_html=True
